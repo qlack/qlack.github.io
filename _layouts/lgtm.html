@@ -1,0 +1,125 @@
+---
+layout: wrapper
+---
+<!-- Site header -->
+<header class="site-header">
+
+  <!-- Logo & Navigation -->
+  {% include top-navigation.html activeLgtm="active" %}
+  <!-- END Logo & Navigation -->
+  <!-- Header image -->
+  <div class="header-image bg-img-page-lgtm-header overlay-black overlay-pale">
+    <div class="container">
+      <h1>
+        <strong>QLACK LGTM</strong>
+      </h1>
+      <h4>QLACK LGTM is a Helm chart that deploys a complete, ready-to-use observability stack built around
+        Grafana Loki, Mimir, Tempo, Grafana, and the OpenTelemetry Collector, wiring together logs, metrics,
+        and traces in a single view.
+      </h4>
+      <br>
+    </div>
+  </div>
+  <!-- END Header image -->
+</header>
+<!-- END Site header -->
+
+<main>
+  <section>
+    <div class="container">
+      <h4>By deploying the QLACK LGTM stack you get the following components and features out of the box:</h4>
+
+      <ul class="features">
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-exchange"></i>
+          </div>
+          <h5>OpenTelemetry Collector</h5>
+          <p>Runs as a DaemonSet and accepts OTLP traces, metrics, and logs from your applications on ports
+            4317 and 4318, while also collecting host, kubelet, and cluster metrics.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-file-text-o"></i>
+          </div>
+          <h5>Grafana Loki</h5>
+          <p>Scalable log storage and querying. Logs ingested by the collector are exported to Loki for
+            fast, label-based searching across your services.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-line-chart"></i>
+          </div>
+          <h5>Grafana Mimir</h5>
+          <p>Prometheus-compatible, long-term metrics storage. Metrics collected from your applications and
+            infrastructure are exported to Mimir for reliable querying.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-sitemap"></i>
+          </div>
+          <h5>Grafana Tempo</h5>
+          <p>Distributed tracing backend. Traces are exported to Tempo, enabling end-to-end request
+            drilldown and root-cause investigation.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-dashboard"></i>
+          </div>
+          <h5>Grafana &amp; Dashboards</h5>
+          <p>Grafana ships pre-configured with Loki, Prometheus/Mimir, and Tempo datasources and a built-in
+            QLACK OTEL-LGTM Observability Overview dashboard set as the home page.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-bolt"></i>
+          </div>
+          <h5>Application RED Signals</h5>
+          <p>Rate, Errors, and Duration summaries derived from Tempo metrics-generator span metrics, including
+            request rate, error rate, p95/p99 latency, and trace/log counts.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-tachometer"></i>
+          </div>
+          <h5>Service Performance</h5>
+          <p>Per-service request rate, error rate, and p95 duration over time, plus tables of the slowest and
+            most error-prone operations.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-search"></i>
+          </div>
+          <h5>Correlated Telemetry</h5>
+          <p>Metrics, logs, and traces are correlated in a single view, letting you pivot from a metric spike
+            straight to the related error logs and traces.</p>
+        </li>
+
+        <li>
+          <div class="icon">
+            <i class="fa fa-rocket"></i>
+          </div>
+          <h5>Quick Deployment</h5>
+          <p>Packaged as a single Helm chart for Kubernetes 1.20+ and Helm 3.x, the whole stack can be
+            installed and wired together with a single deployment.</p>
+        </li>
+      </ul>
+
+      <div class="buttons-center">
+        <a class="btn btn-outline btn-dark" target="_noblank" href="https://github.com/qlack/QLACK-lgtm">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          <span class="button-text">View on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
