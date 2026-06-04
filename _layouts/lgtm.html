@@ -113,10 +113,12 @@ layout: wrapper
         </li>
       </ul>
 
-      <h4>Out of the box, Grafana ships with a pre-provisioned QLACK OTEL-LGTM Observability Overview dashboard,
-        set as the home page, that correlates metrics, logs, and traces from the stack in a single view:</h4>
+      <p class="lead text-center" style="max-width: 720px; margin: 0 auto 20px;">
+        Grafana ships with a pre-provisioned QLACK OTEL-LGTM Observability Overview dashboard
+        that correlates metrics, logs, and traces from the stack in a single view.
+      </p>
       <br>
-      <div class="carousel" data-flickity='{ "imagesLoaded": true, "percentPosition": false }'>
+      <div class="carousel" data-flickity='{ "imagesLoaded": true, "adaptiveHeight": true, "percentPosition": false }'>
         <img src="assets/img/lgtm/1.png" title="Application RED signals derived from Tempo metrics-generator span metrics" />
         <img src="assets/img/lgtm/2.png" title="Per-service request rate, error rate, and p95 duration over time" />
         <img src="assets/img/lgtm/3.png" title="Log volume and error logs from Loki, broken down by service" />
