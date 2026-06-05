@@ -114,24 +114,310 @@ layout: wrapper
       </ul>
 
       <div class="buttons-center">
-        <a class="btn btn-outline btn-dark" target="_noblank" href="https://github.com/qlack/QLACK-lgtm">
+        <a class="btn btn-outline btn-dark" target="_blank" href="https://github.com/qlack/QLACK-lgtm">
           <i class="fa fa-github" aria-hidden="true"></i>
           <span class="button-text">View on GitHub</span>
         </a>
       </div>
-      <br>
-      <br>
-      <h4 class="text-center" style="max-width: 760px; margin: 0 auto 20px; font-size: 21px; font-weight: 600;">
-        Grafana ships with a pre-provisioned LGTM Observability dashboard
-        that correlates metrics, logs, and traces.
-      </h4>
-      <br>
-      <div class="carousel" data-flickity='{ "imagesLoaded": true, "adaptiveHeight": true, "percentPosition": false }'>
-        <img src="assets/img/lgtm/1.png" title="Application RED signals derived from Tempo metrics-generator span metrics" />
-        <img src="assets/img/lgtm/2.png" title="Per-service request rate, error rate, and p95 duration over time" />
-        <img src="assets/img/lgtm/3.png" title="Log volume and error logs from Loki, broken down by service" />
-        <img src="assets/img/lgtm/4.png" title="Trace drilldown in Tempo for recent, slow, and error traces" />
-      </div>
+
+      <style>
+        .lgtm-showcase {
+          margin-top: 70px;
+        }
+
+        .lgtm-showcase .section-intro {
+          max-width: 860px;
+          margin: 0 auto 34px;
+          text-align: center;
+        }
+
+        .lgtm-showcase .section-intro h2 {
+          margin-bottom: 14px;
+          font-weight: 700;
+        }
+
+        .lgtm-showcase .section-intro p {
+          font-size: 17px;
+          line-height: 1.7;
+          color: #555;
+        }
+
+        .lgtm-hero-card,
+        .lgtm-tabs {
+          background: #fff;
+          border: 1px solid #e8e8e8;
+          border-radius: 16px;
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+          overflow: hidden;
+        }
+
+        .lgtm-hero-card {
+          margin-bottom: 34px;
+        }
+
+        .lgtm-hero-content {
+          padding: 28px 32px 10px;
+        }
+
+        .lgtm-hero-content h3 {
+          margin-top: 0;
+          font-weight: 700;
+        }
+
+        .lgtm-hero-content p {
+          color: #555;
+          line-height: 1.65;
+        }
+
+        .lgtm-hero-images {
+          padding: 0 22px 24px;
+        }
+
+        /* Click-to-zoom screenshot wrapper */
+        .lgtm-zoom {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          border-radius: 10px;
+          border: 1px solid #2c313a;
+          background: #101217;
+          cursor: zoom-in;
+        }
+
+        .lgtm-zoom::after {
+          content: "\002B  Click to enlarge";
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          padding: 5px 11px;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1;
+          color: #fff;
+          background: rgba(16, 18, 23, 0.82);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 20px;
+          opacity: 0;
+          transition: opacity .2s ease;
+          pointer-events: none;
+        }
+
+        .lgtm-zoom:hover::after {
+          opacity: 1;
+        }
+
+        .lgtm-shot {
+          display: block;
+          width: 100%;
+          height: auto;
+          transition: transform .35s ease;
+        }
+
+        .lgtm-zoom:hover .lgtm-shot {
+          transform: scale(1.015);
+        }
+
+        /* Pure-CSS tabbed dashboard showcase */
+        .lgtm-tabs > input {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .lgtm-tablist {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          padding: 16px 16px 0;
+          background: #fafafa;
+          border-bottom: 1px solid #ececec;
+        }
+
+        .lgtm-tablist label {
+          padding: 12px 18px;
+          margin-bottom: -1px;
+          font-size: 15px;
+          font-weight: 600;
+          color: #666;
+          cursor: pointer;
+          border: 1px solid transparent;
+          border-bottom: 0;
+          border-radius: 10px 10px 0 0;
+          white-space: nowrap;
+          transition: background .15s ease, color .15s ease;
+        }
+
+        .lgtm-tablist label:hover {
+          color: #222;
+          background: #f0f0f0;
+        }
+
+        .lgtm-panel {
+          display: none;
+          padding: 28px 30px 32px;
+        }
+
+        .lgtm-panel h4 {
+          margin-top: 0;
+          font-weight: 700;
+        }
+
+        .lgtm-panel p {
+          max-width: 1100px;
+          color: #555;
+          line-height: 1.65;
+        }
+
+        .lgtm-panel .lgtm-zoom {
+          margin-top: 18px;
+        }
+
+        #lgtm-t1:checked ~ .lgtm-panels #lgtm-p1,
+        #lgtm-t2:checked ~ .lgtm-panels #lgtm-p2,
+        #lgtm-t3:checked ~ .lgtm-panels #lgtm-p3,
+        #lgtm-t4:checked ~ .lgtm-panels #lgtm-p4,
+        #lgtm-t5:checked ~ .lgtm-panels #lgtm-p5 {
+          display: block;
+        }
+
+        #lgtm-t1:checked ~ .lgtm-tablist label[for="lgtm-t1"],
+        #lgtm-t2:checked ~ .lgtm-tablist label[for="lgtm-t2"],
+        #lgtm-t3:checked ~ .lgtm-tablist label[for="lgtm-t3"],
+        #lgtm-t4:checked ~ .lgtm-tablist label[for="lgtm-t4"],
+        #lgtm-t5:checked ~ .lgtm-tablist label[for="lgtm-t5"] {
+          color: #1a1a1a;
+          background: #fff;
+          border-color: #ececec;
+        }
+
+        .lgtm-tabs > input:focus-visible + label,
+        .lgtm-tabs > input:focus-visible ~ .lgtm-tablist label {
+          outline: none;
+        }
+
+        @media (max-width: 767px) {
+          .lgtm-showcase {
+            margin-top: 48px;
+          }
+
+          .lgtm-hero-content {
+            padding: 22px 20px 6px;
+          }
+
+          .lgtm-hero-images {
+            padding: 0 14px 18px;
+          }
+
+          .lgtm-tablist {
+            padding: 10px 10px 0;
+            gap: 4px;
+          }
+
+          .lgtm-tablist label {
+            padding: 10px 12px;
+            font-size: 13px;
+          }
+
+          .lgtm-panel {
+            padding: 22px 16px 24px;
+          }
+
+          .lgtm-zoom::after {
+            display: none;
+          }
+        }
+      </style>
+
+      <section class="lgtm-showcase" aria-labelledby="lgtm-showcase-title">
+        <div class="section-intro">
+          <h2 id="lgtm-showcase-title">See QLACK LGTM in action</h2>
+          <p>QLACK LGTM ships with a ready-to-use Grafana dashboard that combines metrics, logs, and traces into a single troubleshooting experience for Kubernetes workloads and OpenTelemetry-instrumented applications.</p>
+        </div>
+
+        <article class="lgtm-hero-card">
+          <div class="lgtm-hero-content">
+            <h3>Dashboard-wide filtering</h3>
+            <p>Filter the entire dashboard by service, namespace, pod, or log service. Every panel &mdash; metrics, logs, and traces alike &mdash; instantly narrows to the selection you choose, so you can focus on exactly the workloads you care about.</p>
+          </div>
+          <div class="lgtm-hero-images">
+            <a class="lgtm-zoom" href="assets/img/lgtm/application-red-signals-filters.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM dashboard filters screenshot">
+              <img class="lgtm-shot" src="assets/img/lgtm/application-red-signals-filters.png" alt="Grafana dashboard filters for selecting service, namespace, pod, and log service across the entire QLACK LGTM dashboard" loading="lazy" />
+            </a>
+          </div>
+        </article>
+
+        <article class="lgtm-hero-card">
+          <div class="lgtm-hero-content">
+            <h3>Application RED signals from Tempo</h3>
+            <p>Instantly inspect request rate, error rate, p95/p99 duration, trace span volume, and log volume, all derived from Tempo metrics-generator span metrics.</p>
+          </div>
+          <div class="lgtm-hero-images">
+            <a class="lgtm-zoom" href="assets/img/lgtm/application-red-signals-overview.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM Application RED signals screenshot">
+              <img class="lgtm-shot" src="assets/img/lgtm/application-red-signals-overview.png" alt="QLACK LGTM Application RED signals dashboard showing request rate, error rate, duration, trace spans, and log counts" loading="lazy" />
+            </a>
+          </div>
+        </article>
+
+        <div class="lgtm-tabs">
+          <input type="radio" name="lgtm-tabs" id="lgtm-t1" checked>
+          <input type="radio" name="lgtm-tabs" id="lgtm-t2">
+          <input type="radio" name="lgtm-tabs" id="lgtm-t3">
+          <input type="radio" name="lgtm-tabs" id="lgtm-t4">
+          <input type="radio" name="lgtm-tabs" id="lgtm-t5">
+
+          <div class="lgtm-tablist" role="tablist" aria-label="QLACK LGTM dashboard sections">
+            <label for="lgtm-t1">Service performance</label>
+            <label for="lgtm-t2">Logs &amp; errors</label>
+            <label for="lgtm-t3">Trace drilldown</label>
+            <label for="lgtm-t4">Root-cause hints</label>
+            <label for="lgtm-t5">Kubernetes runtime</label>
+          </div>
+
+          <div class="lgtm-panels">
+            <section class="lgtm-panel" id="lgtm-p1">
+              <h4>Service performance overview</h4>
+              <p>Understand service behaviour at a glance with request throughput, error percentages, latency percentiles, slow operations, and failing endpoints.</p>
+              <a class="lgtm-zoom" href="assets/img/lgtm/service-performance.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM service performance screenshot">
+                <img class="lgtm-shot" src="assets/img/lgtm/service-performance.png" alt="QLACK LGTM service performance dashboard with request rate, error rate, p95 duration, slow operations, and erroring operations" loading="lazy" />
+              </a>
+            </section>
+
+            <section class="lgtm-panel" id="lgtm-p2">
+              <h4>Recent logs and application errors</h4>
+              <p>Move from high-level metrics to recent logs and errors without leaving the dashboard, with highlighted failures that make troubleshooting faster.</p>
+              <a class="lgtm-zoom" href="assets/img/lgtm/application-logs-errors.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM logs and errors screenshot">
+                <img class="lgtm-shot" src="assets/img/lgtm/application-logs-errors.png" alt="QLACK LGTM recent application logs and application errors panel with highlighted exception and failure terms" loading="lazy" />
+              </a>
+            </section>
+
+            <section class="lgtm-panel" id="lgtm-p3">
+              <h4>Tempo trace drilldown</h4>
+              <p>Drill down into Tempo traces to find slow requests, error traces, HTTP 5xx traces, and problematic downstream or client spans.</p>
+              <a class="lgtm-zoom" href="assets/img/lgtm/tempo-trace-drilldown.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM Tempo trace drilldown screenshot">
+                <img class="lgtm-shot" src="assets/img/lgtm/tempo-trace-drilldown.png" alt="QLACK LGTM Tempo trace drilldown panels for recent traces, slow traces, error traces, HTTP 5xx traces, and slow downstream spans" loading="lazy" />
+              </a>
+            </section>
+
+            <section class="lgtm-panel" id="lgtm-p4">
+              <h4>Trace root-cause hints</h4>
+              <p>Use root-cause hints to quickly identify exception traces, slow root-service traces, downstream errors, expensive spans, and large traces by span count.</p>
+              <a class="lgtm-zoom" href="assets/img/lgtm/trace-root-cause-hints.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM trace root-cause hints screenshot">
+                <img class="lgtm-shot" src="assets/img/lgtm/trace-root-cause-hints.png" alt="QLACK LGTM trace root-cause hints dashboard with exception traces, slow root-service traces, downstream errors, and large traces" loading="lazy" />
+              </a>
+            </section>
+
+            <section class="lgtm-panel" id="lgtm-p5">
+              <h4>OTEL-LGTM pod usage and overall node usage</h4>
+              <p>The pod CPU and memory working set panels are filtered to OTEL-LGTM-related components (OpenTelemetry Collector, Grafana, Loki, Mimir, and Tempo) and grouped by the instance label. The node CPU and memory panels show overall per-node usage across all workloads, not OTEL-LGTM-specific.</p>
+              <a class="lgtm-zoom" href="assets/img/lgtm/kubernetes-otel-lgtm-runtime.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM Kubernetes runtime screenshot">
+                <img class="lgtm-shot" src="assets/img/lgtm/kubernetes-otel-lgtm-runtime.png" alt="QLACK LGTM Kubernetes and OTEL-LGTM runtime dashboard showing pod and node CPU and memory usage" loading="lazy" />
+              </a>
+            </section>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 
