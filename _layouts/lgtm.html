@@ -265,7 +265,7 @@ layout: wrapper
         }
 
         .lgtm-panel p {
-          max-width: 820px;
+          max-width: 1100px;
           color: #555;
           line-height: 1.65;
         }
@@ -409,8 +409,8 @@ layout: wrapper
             </section>
 
             <section class="lgtm-panel" id="lgtm-p5">
-              <h4>Kubernetes and OTEL-LGTM runtime</h4>
-              <p>Monitor the LGTM and Kubernetes runtime itself with pod CPU usage, pod memory working set, node CPU usage, and node memory usage panels.</p>
+              <h4>OTEL-LGTM pod usage and overall node usage</h4>
+              <p>The pod CPU and memory working set panels are filtered to OTEL-LGTM-related components (OpenTelemetry Collector, Grafana, Loki, Mimir, and Tempo) and grouped by the instance label. The node CPU and memory panels show overall per-node usage across all workloads, not OTEL-LGTM-specific.</p>
               <a class="lgtm-zoom" href="assets/img/lgtm/kubernetes-otel-lgtm-runtime.png" target="_blank" rel="noopener" aria-label="Enlarge the QLACK LGTM Kubernetes runtime screenshot">
                 <img class="lgtm-shot" src="assets/img/lgtm/kubernetes-otel-lgtm-runtime.png" alt="QLACK LGTM Kubernetes and OTEL-LGTM runtime dashboard showing pod and node CPU and memory usage" loading="lazy" />
               </a>
